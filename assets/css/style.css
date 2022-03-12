@@ -32,7 +32,7 @@ header{border-bottom: 5px solid rgb(27, 192, 165);}
 
 #search_box{
   position: relative;
-  width: 350px;
+  width: auto;
 }
 
 #search_box input{
