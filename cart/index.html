@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Shopping Cart</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <section>
+        <div class="container">
+            <div class="cart">
+                <div class="col-md-12 col-lg-10 mx-auto">
+                    <div class="cart-item">
+                        <div class="row">
+                            <div class="col-md-7 center-item">
+                                <img src="images/product-1.png" alt="">
+                                <h5>iPhone 11 128GB Black</h5>
+                            </div>
+
+                            <div class="col-md-5 center-item">
+                                <div class="input-group number-spinner">
+                                    <button class="btn btn-default"><i class="fas fa-minus"></i></button>
+                                    <input type="text" id="currentValue" class="form-control text-center" value="1">
+                                    <button class="btn btn-default"><i id="add-item" class="fas fa-plus"></i></button>
+                                </div>
+                                <h5>$ <span id="cost">1219</span></h5>
+                                <img src="images/remove.png" alt="" class="remove-item">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cart-item">
+                        <div class="row">
+                            <div class="col-md-7 center-item mx-auto">
+                                <img src="images/product-2.png" alt="">
+                                <h5>iPhone 11 Silicone Case - Black</h5>
+                            </div>
+                            <div class="col-md-5 center-item">
+                                <div class="input-group number-spinner">
+                                    <button class="btn btn-default"><i class="fas fa-minus"></i></button>
+                                    <input type="text" id="Value" class="form-control text-center" value="1">
+                                    <button class="btn btn-default"><i id="item" class="fas fa-plus"></i></button>
+
+                                </div>
+                                <h5>$59</h5>
+                                <img src="images/remove.png" alt="" class="radd-item1emove-item">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cart-item">
+                        <div class="row">
+
+                            <div class="col-md-8">
+                                <h5>Subtotal: </h5>
+                                <h5>Tax:</h5>
+                                <h5>Total:</h5>
+                            </div>
+
+                            <div class="col-md-4 status">
+                                <h5>$ <span id="subtotal"> 1219</span></h5>
+                                <h5>$0</h5>
+                                <h5>$ <span id="taxAdded">1278</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 pt-4 pb-4">
+                        <button type="button" class="btn btn-success check-out">Check Out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // //add-item handler-phone
+        // const addBtn = document.getElementById("add-item");
+        // addBtn.addEventListener("click", function() {
+
+        //     const currentValue = document.getElementById("currentValue").value;
+        //     const changedValue = parseFloat(currentValue);
+        //     const addNewValue = changedValue + 1;
+        //     document.getElementById("currentValue").value = addNewValue;
+        //     addItem("subtotal", addNewValue);
+        //     addItem("taxAdded", addNewValue);
+        // })
+
+        // function addItem(id, addNewValue) {
+        //     const Value = document.getElementById(id).innerText;
+        //     const convert = parseFloat(Value);
+        //     const costAdd = addNewValue * convert;
+        //     document.getElementById(id).innerText = costAdd;
+        // }
+        // //add item handler-case
+        // const addBtn = document.getElementById("item");
+        // addBtn.addEventListener("click", function() {
+
+        //     const currentValue = document.getElementById("Value").value;
+        //     const changedValue = parseFloat(currentValue);
+        //     const addNewValue = changedValue + 1;
+        //     document.getElementById("Value").value = addNewValue;
+        //     addItem("subtotal", addNewValue);
+        //     addItem("taxAdded", addNewValue);
+        // })
+
+        // function addItem(id, addNewValue) {
+        //     const Value = document.getElementById(id).innerText;
+        //     const convert = parseFloat(Value);
+        //     const costAdd = addNewValue * convert;
+        //     document.getElementById(id).innerText = costAdd;
+        // }
+
+
+
+        //plus button one get pressed
+        sumFunction();
+        const plusButton1Pressed = document.getElementById("plusButton1");
+        plusButton1Pressed.addEventListener("click", function() {
+                const firstInputNumber = getInputNumber("first-input");
+
+                //updater inner text
+                const price = 1219;
+                const newFirstNumber = firstInputNumber + 1;
+                updateInnerText(newFirstNumber, "iPhone-price", price);
+                updateInputNumber("first-input", newFirstNumber);
+                sumFunction();
+
+
+            })
+            //minus button one get pressed
+        const minusButton1Pressed = document.getElementById("minusButton1");
+        minusButton1Pressed.addEventListener("click", function() {
+                const firstInputNumber = getInputNumber("first-input");
+                //update innerText
+                const newFirstNumber = firstInputNumber - 1;
+
+                const price = 1219;
+                const zero = 0;
+                if (newFirstNumber < 0) {
+                    updateInputNumber("first-input", zero);
+                    updateInnerText(zero, "iPhone-price", price);
+                } else {
+                    updateInputNumber("first-input", newFirstNumber);
+                    updateInnerText(newFirstNumber, "iPhone-price", price);
+                }
+
+
+                sumFunction();
+            })
+            //plus button two get pressed
+        const plusButton2Pressed = document.getElementById("plusButton2");
+        plusButton2Pressed.addEventListener("click", function() {
+                const secondInputNumber = getInputNumber("second-input");
+
+
+                const price = 59;
+                const newFirstNumber = secondInputNumber + 1;
+                updateInnerText(newFirstNumber, "case-price", price);
+                updateInputNumber("second-input", newFirstNumber);
+
+                sumFunction();
+            })
+            //minus button two get pressed
+        const minusButton2Pressed = document.getElementById("minusButton2");
+        minusButton2Pressed.addEventListener("click", function() {
+                const secondInputNumber = getInputNumber("second-input");
+
+
+                const newFirstNumber = secondInputNumber - 1;
+
+                const price = 59;
+                const zero = 0;
+                if (newFirstNumber < 0) {
+                    updateInputNumber("second-input", zero);
+                    updateInnerText(zero, "case-price", price);
+                } else {
+                    updateInputNumber("second-input", newFirstNumber);
+                    updateInnerText(newFirstNumber, "case-price", price);
+                }
+
+                sumFunction();
+            })
+            //first-input box letter change manual
+        document.getElementById("first-input").oninput = function() {
+            myFunction("first-input", "iPhone-price", 1219)
+        };
+        //second-input box letter change manual
+        document.getElementById("second-input").oninput = function() {
+            myFunction("second-input", "case-price", 59)
+        };
+
+        //function
+        function getInputNumber(id) {
+            const numString = document.getElementById(id).value;
+            const num = parseInt(numString);
+            return num;
+        }
+
+        function updateInnerText(number, id, value) {
+            const textValue = document.getElementById(id).innerText;
+            document.getElementById(id).innerText = value * number;
+        }
+
+        function updateInputNumber(id, num) {
+            document.getElementById(id).value = num;
+        }
+
+        function myFunction(id, id2, price) {
+            const numString = document.getElementById(id).value;
+            const num = parseInt(numString);
+            const textValue = document.getElementById(id2).innerText;
+            document.getElementById(id2).innerText = price * num;
+            sumFunction();
+
+        }
+
+        function sumFunction() {
+            const textValue1 = document.getElementById("iPhone-price").innerText;
+            const textValue2 = document.getElementById("case-price").innerText;
+            const value1 = parseInt(textValue1);
+            const value2 = parseInt(textValue2);
+            document.getElementById("total").innerText = value1 + value2;
+            const Tax = (value1 + value2) * .15;
+            document.getElementById("tax").innerText = Tax;
+            document.getElementById("grand-total").innerText = Tax + value1 + value2;
+
+        }
+        const checkOutClicked = document.getElementById("checkOut");
+        checkOutClicked.addEventListener("click", function() {
+            const textValue = document.getElementById("grand-total").innerText;
+            const value = parseFloat(textValue);
+            if (value > 0) {
+                document.getElementById("main-cart").style.display = "none";
+                document.getElementById("after-checkout").style.display = "block";
+                document.getElementById("total-checkout").innerText = value;
+
+            }
+        })
+    </script>
+</body>
+
+</html>
